@@ -144,28 +144,16 @@ header::after {
 .text-container { text-align: center; max-width: 64ch; }
 
 header h1 {
-  font-size: clamp(2rem, 6vw, 2.8rem);
+  font-size: clamp(1.6rem, 4.4vw, 2.2rem);
   margin: 0 0 10px 0;
-  letter-spacing: 0.5px;
-  text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
-}
-
-.header-roles {
-  margin: 0 0 14px 0;
-  font-size: clamp(0.95rem, 2.6vw, 1.15rem);
-  color: var(--gold);
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
   text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
 }
 
 .header-tagline {
   margin: 0 auto 26px auto;
-  max-width: 44ch;
-  font-size: clamp(1rem, 2.6vw, 1.15rem);
-  color: var(--text-dim);
-  font-style: italic;
+  font-size: 1.3em;
+  color: var(--gold);
+  font-weight: 500;
   text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
 }
 
@@ -237,14 +225,36 @@ nav a.current::after {
 }
 
 /* ==================== HEADINGS ==================== */
+/* John's original double underline: a rule that fades at both ends, with a
+   short solid accent centred beneath it. The flat full-width bar I had here
+   was the "blocky" look — this is the elegant version. */
 h2 {
+  position: relative;
   text-align: center;
-  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-size: clamp(1.5rem, 3.5vw, 1.95rem);
   margin: 0 auto 40px auto;
+  padding-bottom: 14px;
   color: var(--text);
   display: table;
-  border-bottom: 2px solid var(--gold);
-  padding-bottom: 8px;
+}
+
+h2::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 4px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 38%;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--gold);
 }
 
 /* ==================== ABOUT ==================== */
@@ -282,31 +292,49 @@ h2 {
 #about-me .about-content { flex: 1; min-width: 0; }
 #about-me h2 { margin-left: 0; margin-right: auto; }
 
+/* John's original: 1.2em, gold, bold, normal case. */
 .about-tagline {
-  font-size: 0.95em;
+  font-size: 1.2em;
   color: var(--gold);
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  margin: 0 0 14px 0;
+  font-weight: bold;
+  margin: 0 0 12px 0;
 }
 
-.about-intro { font-size: 1.1em; margin: 0 0 20px 0; }
+/* The lead line was reading as a flat white bar sitting on top of more
+   white body copy. Lighter weight plus air makes it a lead-in. */
+.about-intro {
+  font-size: 1.15em;
+  line-height: 1.7;
+  margin: 0 0 24px 0;
+  color: var(--text);
+}
+.about-intro strong { font-weight: 400; }
 
-/* Capability list — typographic, no icons. */
+/* No icons, and no rule under each item: five underlines stacked above the
+   section divider was the clash. A small gold diamond echoes the ornament
+   used on the Collective section instead. */
 .about-list {
   list-style: none;
   padding: 0;
-  margin: 0 0 8px 0;
+  margin: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 0 32px;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 10px 30px;
 }
 .about-list li {
-  padding: 9px 0;
-  border-bottom: 1px solid rgba(212,175,55,0.18);
+  position: relative;
+  padding-left: 20px;
   font-size: 0.98em;
   color: var(--text-dim);
+}
+.about-list li::before {
+  content: '\25C6';
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  font-size: 0.62em;
+  color: var(--gold);
+  opacity: 0.85;
 }
 
 .about-divider {
@@ -723,6 +751,47 @@ h2 {
   border-radius: 50%;
   cursor: pointer;
 }
+.playlist {
+  margin-top: 30px;
+  border-top: 1px solid rgba(212,175,55,0.3);
+  padding-top: 20px;
+}
+
+.playlist-title {
+  color: var(--gold);
+  font-size: 1.15em;
+  font-weight: 600;
+  margin: 0 0 15px 0;
+}
+
+.playlist-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  padding: 12px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1em;
+  text-align: left;
+  color: var(--text);
+  transition: background var(--speed), border-color var(--speed), transform var(--speed);
+}
+.playlist-item:hover {
+  background: rgba(212,175,55,0.1);
+  border-color: var(--gold);
+  transform: translateX(5px);
+}
+.playlist-item.active { background: rgba(212,175,55,0.2); border-color: var(--gold); }
+
+.playlist-number { color: var(--text-muted); font-size: 0.9em; }
+.playlist-track-title { flex: 1; font-weight: 500; }
+.playlist-track-duration { color: var(--text-muted); font-size: 0.9em; }
+
 .volume-slider::-moz-range-thumb {
   width: 16px; height: 16px;
   background: var(--gold);
@@ -792,16 +861,24 @@ h2 {
 
 .collective-text { text-align: center; }
 
+/* Normal case at John's original 1.5em. The uppercase + letterspaced
+   treatment I had made the solid bar underneath read as a block. */
 .collective-subheading {
-  font-size: 1.15em;
+  position: relative;
+  font-size: 1.5em;
   color: var(--gold);
-  border-bottom: 3px solid var(--gold);
   display: inline-block;
-  padding-bottom: 0.4rem;
+  padding-bottom: 0.5rem;
   margin: 0 0 1.5rem 0;
   font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
+}
+
+.collective-subheading::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
 }
 
 .collective-text p { font-size: 1.03em; line-height: 1.8; margin-bottom: 1.2rem; color: var(--text-dim); }
