@@ -350,10 +350,14 @@ h2::before {
   opacity: 0.85;
 }
 
+/* Fades from the centre, matching the heading rule and the testimonial
+   dividers. The original faded left-to-right, which read as lopsided next
+   to them. */
 .about-divider {
-  border: 0; height: 2px;
-  background: linear-gradient(to right, var(--gold), transparent);
-  margin: 26px 0;
+  border: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 30px 0;
 }
 
 /* Body copy: a readable measure, generous leading, and a gold drop cap to
