@@ -139,7 +139,9 @@ header::after {
   box-shadow: 0 4px 20px rgba(0,0,0,0.6), 0 0 30px rgba(212,175,55,0.3);
 }
 
-.text-container { text-align: center; max-width: 42ch; }
+/* Wide enough to keep the role line on one row on desktop; the tagline
+   is capped separately so it still reads as a short sentence. */
+.text-container { text-align: center; max-width: 64ch; }
 
 header h1 {
   font-size: clamp(2rem, 6vw, 2.8rem);
@@ -159,7 +161,8 @@ header h1 {
 }
 
 .header-tagline {
-  margin: 0 0 26px 0;
+  margin: 0 auto 26px auto;
+  max-width: 44ch;
   font-size: clamp(1rem, 2.6vw, 1.15rem);
   color: var(--text-dim);
   font-style: italic;
@@ -220,6 +223,18 @@ nav a {
   transition: color var(--speed);
 }
 nav a:hover { color: var(--gold-hover); text-decoration: none; }
+
+/* Current section, set by the observer in index.html. */
+nav a.current { color: var(--gold-hover); }
+nav a.current::after {
+  content: '';
+  display: block;
+  height: 2px;
+  margin-top: 4px;
+  border-radius: 2px;
+  background: var(--gold-hover);
+  box-shadow: 0 0 8px rgba(212,175,55,0.6);
+}
 
 /* ==================== HEADINGS ==================== */
 h2 {
@@ -325,6 +340,16 @@ h2 {
 }
 .tab:hover { background-color: rgba(212,175,55,0.12); transform: translateY(-2px); }
 .tab.active { background-color: var(--gold); color: var(--bg); font-weight: bold; }
+
+/* Reserve height so switching between a tall panel (Games) and a short one
+   (Music) doesn't drag everything below it up the page. */
+.tab-panels { min-height: 740px; }
+.tab-panel { animation: panelIn 0.25s ease both; }
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+@media (max-width: 768px) { .tab-panels { min-height: 0; } }
 
 /* ==================== CAROUSEL (shared by all four) ==================== */
 .carousel-container { max-width: 1000px; margin: 0 auto; position: relative; }
@@ -500,14 +525,28 @@ h2 {
 .view-pdf-btn:hover { background: linear-gradient(135deg, var(--gold-hover), var(--gold)); transform: scale(1.05); }
 
 /* ==================== GAMES ==================== */
-.itch-banner-row { text-align: center; margin-bottom: 24px; }
-.itch-banner-full {
+/* The Gaian Games mark is pale artwork on a dark page. Framing it and
+   vignetting the edges lets it sit in the design instead of glaring out
+   of it. The image itself is untouched. */
+.itch-banner-row { display: flex; justify-content: center; margin-bottom: 28px; }
+
+.banner-frame {
+  position: relative;
   width: 100%;
-  max-width: 800px;
-  height: auto;
+  max-width: 560px;
   border-radius: 14px;
-  box-shadow: 0 4px 18px rgba(0,0,0,0.3);
+  overflow: hidden;
+  border: 1px solid rgba(212,175,55,0.55);
+  box-shadow: 0 6px 26px rgba(0,0,0,0.55);
 }
+.banner-frame::after {
+  content: '';
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(18,18,18,0) 40%, rgba(18,18,18,0.5) 100%);
+}
+
+.itch-banner-full { display: block; width: 100%; height: auto; }
 
 .profile-avatar {
   width: 120px; height: 120px;

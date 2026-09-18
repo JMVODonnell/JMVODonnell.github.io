@@ -137,6 +137,9 @@
           <button type="button" class="tab" role="tab" id="tab-music"      aria-controls="music"      aria-selected="false" data-target="music">Music</button>
         </div>
 
+        <!-- Wrapper holds a min-height so switching tabs doesn't lurch the page. -->
+        <div class="tab-panels">
+
         <!-- Narrative: animatics and trailers -->
         <div id="narrative" class="tab-panel" role="tabpanel" aria-labelledby="tab-narrative" data-carousel tabindex="0">
           <div class="carousel-container">
@@ -247,7 +250,9 @@
         <!-- Games -->
         <div id="games" class="tab-panel" role="tabpanel" aria-labelledby="tab-games" data-carousel tabindex="0">
           <div class="itch-banner-row">
-            <img class="itch-banner-full" src="Images/GaiusBanner.jpg" alt="Gaian Games banner" loading="lazy" width="1600" height="800">
+            <div class="banner-frame">
+              <img class="itch-banner-full" src="Images/GaiusBanner.jpg" alt="Gaian Games" loading="lazy" width="1600" height="800">
+            </div>
           </div>
           <div class="carousel-container">
             <div class="carousel-dots" id="gamesDots"></div>
@@ -302,6 +307,8 @@
             <audio id="audioPlayer" preload="none"></audio>
           </div>
         </div>
+
+        </div><!-- /.tab-panels -->
 
       </div>
     </section>
@@ -429,7 +436,7 @@
    ============================================================ */
 const SITE = {
   email:    'jmvodonnell@gmail.com',
-  linkedin: '',                                  // <-- paste your LinkedIn profile URL here
+  linkedin: 'https://www.linkedin.com/in/jmvodonnell/',
   github:   'https://github.com/JMVODonnell',
   itch:     'https://gaiangames.itch.io/',
   bandcamp: 'https://zeropointnatives.bandcamp.com/'
@@ -445,7 +452,6 @@ const GAMES = [
     type:  'profile',
     name:  'J.M. O\'Donnell',
     title: 'Game Developer & Narrative Designer',
-    image: 'Images/Gaius.jpg',
     bio:   'I am drawn to narrative-rich games that explore human connection, the boundaries between the real and the unreal, and the questions that underpin our shared experiences. I build character-driven worlds where magical realism, complex inner lives and immersive soundtracks come together.',
     link:  'https://gaiangames.itch.io/',
     linkText: 'View my itch.io profile'
@@ -515,8 +521,8 @@ document.addEventListener('DOMContentLoaded', function () {
   if (gamesTrack) {
     gamesTrack.innerHTML = GAMES.map(g => {
       if (g.type === 'profile') {
+        // No avatar here: the Gaian Games mark already sits in the banner above.
         return `<div class="carousel-slide"><div class="profile-card">
-            <img src="${esc(g.image)}" class="profile-avatar" alt="${esc(g.name)}" loading="lazy" width="320" height="320">
             <h3 class="profile-name">${esc(g.name)}</h3>
             <p class="profile-title">${esc(g.title)}</p>
             <div class="rule"></div>
@@ -622,6 +628,31 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
   if (tabs.length) selectTab(tabs[0]);
+
+  /* ---------- Highlight the section you're reading ---------- */
+  const navFor = {};
+  $$('nav a[href^="#"]').forEach(a => { navFor[a.getAttribute('href').slice(1)] = a; });
+  const sections = $$('main section[id]').filter(s => navFor[s.id]);
+  if ('IntersectionObserver' in window && sections.length) {
+    const marked = new Set();
+    const paint = () => {
+      // The section nearest the middle of the viewport wins.
+      let best = null, bestDist = Infinity;
+      sections.forEach(s => {
+        if (!marked.has(s)) return;
+        const r = s.getBoundingClientRect();
+        const d = Math.abs((r.top + r.bottom) / 2 - window.innerHeight / 2);
+        if (d < bestDist) { bestDist = d; best = s; }
+      });
+      Object.values(navFor).forEach(a => { a.classList.remove('current'); a.removeAttribute('aria-current'); });
+      if (best) { navFor[best.id].classList.add('current'); navFor[best.id].setAttribute('aria-current', 'true'); }
+    };
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => e.isIntersecting ? marked.add(e.target) : marked.delete(e.target));
+      paint();
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    sections.forEach(s => io.observe(s));
+  }
 
   /* ---------- Read more ---------- */
   $$('.read-more-btn').forEach(btn => {
