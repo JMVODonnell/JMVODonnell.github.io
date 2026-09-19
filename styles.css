@@ -1263,9 +1263,21 @@ nav a.current::after { content: none; }
    lines wrap and nothing else, and the G is a real element positioned
    absolutely on top of it. The two concerns are then independent.
 
-   Every number below was measured by rasterising the glyph and scanning
-   pixels, not read off font metrics. Georgia's G is 0.73em of ink and
-   carries a left side bearing, both of which the metrics understated.
+   SIZING RULE (the standard one): the cap spans from the FIRST line's
+   cap-height down to the LAST line's BASELINE. Here that is
+   12px cap-height + 2 x 29.6px line-height = 71.2px of ink.
+   Sizing it to three full line-boxes (88.8px) is what made it overshoot
+   top and bottom, because a 29.6px line box on 16px text is mostly leading.
+
+   Every number was measured, not estimated: the glyph is rasterised to a
+   canvas and scanned for ink, and the baseline is read from a marker in
+   the live element. Georgia's G is 0.73em of ink with a ~3px left side
+   bearing at this size; the font metrics report 0.71875em and no bearing,
+   which is what kept the cap misplaced.
+
+   CAVEAT: the -3px horizontal nudge is measured for "G". Side bearings
+   differ per glyph, so changing this paragraph's first letter means
+   re-measuring it.
    --------------------------------------------------------------------- */
 #about-me .about-prose > p.has-dropcap {
   position: relative;
@@ -1275,8 +1287,8 @@ nav a.current::after { content: none; }
 #about-me .about-prose > p.has-dropcap::before {
   content: "";
   float: left;
-  width: 100px;
-  height: 88px;   /* just under 3 x 29.6px so the 4th line clears it */
+  width: 84px;
+  height: 88px;   /* > 2 lines and <= 3, so exactly three lines indent */
 }
 
 #about-me .about-prose > p.has-dropcap .dropcap {
@@ -1284,18 +1296,17 @@ nav a.current::after { content: none; }
   top: 0;
   left: 0;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 121.64px;   /* ink = 88.8px = exactly three lines */
+  font-size: 97.53px;   /* ink = 71.2px = line 1 cap top to line 3 baseline */
   line-height: 1;
   color: var(--gold);
   /* Set from measurement: cancels the glyph's bearings so the INK, not the
      glyph box, sits flush in the paragraph corner. */
-  transform: translate(-4px, -16px);
+  transform: translate(-3px, -4px);
 }
 
-@media (max-width: 768px) {
-  #about-me .about-prose > p.has-dropcap::before { width: 74px; height: 88.8px; }
-  #about-me .about-prose > p.has-dropcap .dropcap { font-size: 90px; }
-}
+/* No breakpoint override on purpose. The body font-size and line-height do
+   not change at mobile, so the cap does not need to either, and a second
+   set of numbers would be a second set to keep correct. */
 
 /* Gold key terms, matching the Collective treatment. */
 #about-me .about-prose strong { color: var(--gold); font-weight: 600; }
