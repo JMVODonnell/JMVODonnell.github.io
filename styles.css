@@ -911,15 +911,6 @@ h2::before {
   letter-spacing: 0.5px;
 }
 
-.signature-container { margin-top: 1rem; }
-.signature-container .signature {
-  display: block;
-  max-width: 200px;
-  height: auto;
-  margin: 0 auto;
-  filter: brightness(1.2) sepia(1) saturate(1.5) hue-rotate(20deg);
-  opacity: 0.9;
-}
 
 /* ==================== TESTIMONIALS ==================== */
 #testimonials { background-color: var(--dark-2); text-align: center; }
@@ -1370,11 +1361,14 @@ nav a.current::after { content: none; }
 .signature-container { margin: 0; }
 
 /* White, not gold: the credit line above it is gold and two golds
-   stacked competed with each other. */
+   stacked competed with each other.
+   Sign1.png is padded so the ink's centre of gravity is the image centre,
+   so "center" here centres the signature on its weight rather than on a
+   box that included the long thin O'Donnell tail. Box matches 860/287. */
 .signature-container .signature {
   display: block;
-  width: 200px;
-  height: 84px;
+  width: 230px;
+  height: 77px;
   margin: 0 auto;
   background-color: #ffffff;
   -webkit-mask: url("Images/Sign1.png") no-repeat center / contain;
