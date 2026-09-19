@@ -1263,13 +1263,29 @@ nav a.current::after { content: none; }
   max-width: none;
 }
 
+/* Drop cap. The float version is the fallback: hand-tuned, so the corner is
+   close but never exact. */
 #about-me .about-prose > p:first-child::first-letter {
   float: left;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 3.4em;
-  line-height: 0.82;
-  padding: 0.06em 0.14em 0 0;
+  font-size: 3.2em;
+  line-height: 0.78;
+  margin: 0.09em 0.09em 0 0;
+  padding: 0;
   color: var(--gold);
+}
+
+/* Where it is supported, initial-letter sinks the cap by an exact number of
+   lines and aligns its cap height to the first baseline, which is what
+   squares the corner properly. */
+@supports (initial-letter: 2) or (-webkit-initial-letter: 2) {
+  #about-me .about-prose > p:first-child::first-letter {
+    float: none;
+    -webkit-initial-letter: 2;
+    initial-letter: 2;
+    line-height: normal;
+    margin: 0 0.1em 0 0;
+  }
 }
 
 /* Gold key terms, matching the Collective treatment. */
@@ -1287,24 +1303,37 @@ nav a.current::after { content: none; }
   text-indent: 0.4em;
 }
 
-/* ---- Disclosures ---- */
-.disclosure { margin: 0 0 1.6rem 0; }
+/* ---- Disclosures ----
+   Centred, matched widths, and styled as a smaller Get in touch so they
+   read as a deliberate pair rather than two orphaned controls. */
+.disclosure { margin: 0 0 1.6rem 0; text-align: center; }
 
 .disclosure-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  padding: 9px 18px;
-  background: transparent;
-  border: 1px solid var(--gold-line-str);
-  color: var(--gold);
+  min-width: 250px;
+  padding: 9px 22px;
+  background: var(--gold);
+  border: 1px solid var(--gold);
+  border-radius: var(--radius-btn);
+  color: var(--bg);
   font-family: inherit;
-  font-size: 0.93em;
+  font-size: 0.92em;
+  font-weight: bold;
   letter-spacing: 0.3px;
   cursor: pointer;
-  transition: background var(--speed) var(--ease), color var(--speed) var(--ease);
+  transition: background var(--speed) var(--ease),
+              border-color var(--speed) var(--ease),
+              transform var(--speed) var(--ease);
 }
-.disclosure-btn:hover { background: rgba(212,175,55,0.1); color: var(--gold-hover); }
+.disclosure-btn:hover {
+  background: var(--gold-hover);
+  border-color: var(--gold-hover);
+  color: var(--bg);
+  transform: translateY(-2px);
+}
 
 .chev {
   width: 7px;
@@ -1340,12 +1369,14 @@ nav a.current::after { content: none; }
 
 .signature-container { margin: 0; }
 
+/* White, not gold: the credit line above it is gold and two golds
+   stacked competed with each other. */
 .signature-container .signature {
   display: block;
   width: 200px;
   height: 84px;
   margin: 0 auto;
-  background-color: var(--gold);
+  background-color: #ffffff;
   -webkit-mask: url("Images/Sign1.png") no-repeat center / contain;
   mask: url("Images/Sign1.png") no-repeat center / contain;
   filter: none;
@@ -1355,7 +1386,14 @@ nav a.current::after { content: none; }
 /* ---- Testimonials: equal heights, button on a shared line ---- */
 .carousel-track { align-items: stretch; }
 .testimonial-card { display: flex; flex-direction: column; height: 100%; }
-.testimonial-card blockquote { display: flex; flex-direction: column; flex: 1; }
+/* The gap guarantees clearance even when margin-top:auto collapses to
+   zero on the longest quote — that card had the button touching the text. */
+.testimonial-card blockquote {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 28px;
+}
 .testimonial-card .quote-rest { flex: 0 0 auto; }
 /* Pushes the button to the bottom so it lands on the same line in every
    card, whatever the quote length. */
@@ -1372,15 +1410,11 @@ nav a.current::after { content: none; }
 #collective .collective-image { margin: 0 auto 2rem auto; border: 1px solid var(--gold-line); }
 #collective .collective-subheading { margin-bottom: 0.5rem; }
 #collective .collective-motto { margin: 0 0 1.8rem 0; }
-#collective .collective-text p { text-align: left; }
+/* Everything centred, as it was before the move. */
+#collective .collective-text,
+#collective .collective-text p { text-align: center; }
 #collective .collective-text > p:not([class]) { max-width: 66ch; margin-left: auto; margin-right: auto; }
-.collective-founder {
-  color: var(--gold);
-  font-style: italic;
-  text-align: center;
-  margin: 2rem 0 0 0;
-  letter-spacing: 0.5px;
-}
+#collective .signature-credit { margin-top: 2rem !important; }
 
 /* ---- Responsive ---- */
 @media (max-width: 768px) {
