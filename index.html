@@ -73,10 +73,13 @@
 
   <!-- Navigation -->
   <nav aria-label="Primary">
-    <a href="#about-me">About Me</a>
-    <a href="#projects">Media & Projects</a>
-    <a href="#writing-collective">Collective</a>
-    <a href="#testimonials">Testimonials</a>
+    <div class="nav-inner">
+      <a href="#about-me">About Me</a>
+      <a href="#projects">Media &amp; Projects</a>
+      <a href="#testimonials">Testimonials</a>
+      <!-- Single indicator that slides between links; positioned by script. -->
+      <span class="nav-indicator" aria-hidden="true"></span>
+    </div>
   </nav>
 
   <main id="main">
@@ -85,45 +88,69 @@
     <section id="about-me" aria-labelledby="about-heading">
       <div class="about-container">
         <div class="about-card">
+
           <div class="about-photo">
             <img src="Images/Headshot2.jpg" alt="John O'Donnell" width="420" height="525">
           </div>
-          <div class="about-content">
-            <h2 id="about-heading">About Me</h2>
-            <p class="about-tagline">Narrative Design &middot; Editorial &middot; Worldbuilding &middot; Java Development</p>
-            <p class="about-intro">
-              <strong>I craft stories, shape narratives, and build worlds across games, music, and fiction.</strong>
-            </p>
 
-            <ul class="about-list">
-              <li>Narrative Design &amp; Game Writing</li>
-              <li>Editorial</li>
-              <li>Worldbuilding &amp; Lore</li>
-              <li>Cultural Writer</li>
-              <li>Musician</li>
-              <li>Java Development</li>
-            </ul>
+          <h2 id="about-heading">About Me</h2>
 
-            <hr class="about-divider">
+          <p class="about-intro">I craft stories, shape narratives, and build worlds across games, music, and fiction.</p>
 
-            <p>I graduated with <strong>first-class honours in English, Philosophy, and Creative Writing</strong>, mentored by internationally acclaimed voices including <strong>Mike McCormack, Alan McMonagle, and Nicole Flattery</strong>. Under their guidance, I combined a love of magical realism with an architectural understanding of story structure, voice, immersion, and characterization. My work embodies <strong>memory, identity, and the spaces between things</strong> in the pursuit of perspective and the healing of our social fabric.</p>
+          <ul class="about-list">
+            <li>Narrative Design &amp; Game Writing</li>
+            <li>Editorial</li>
+            <li>Worldbuilding &amp; Lore</li>
+            <li>Cultural Writer</li>
+            <li>Musician</li>
+            <li>Java Development</li>
+          </ul>
 
-            <p>In 2020, my work <a href="https://www.globesoup.net/summer-2020-winner-1" target="_blank" rel="noopener"><em>The Circle, The Sickle, The Star</em></a> was <strong>shortlisted for the Globe Soup Prize</strong>. Since then, I have grown my craft across genres and cross-media IP: from developing <strong>character bibles</strong> and <strong>branching narrative flows</strong> for story-driven games, to collaborating as <strong>Managing Editor at <em>Inspire Me Korea</em></strong> &mdash; a cultural magazine bridging global stories, identity, and cultural insight.</p>
+          <hr class="about-divider">
 
-            <p>I have previously served as <strong>worldbuilder, lore-keeper, and editor</strong> for <em>Soul Atlas</em>, an ambitious cross-media fantasy project where I crafted and combined <strong>geopolitics, culture, ideology, and philosophy</strong> together with character and topography to co-create an original, cohesive universe. I continue to serve as an occasional <strong>narrative and worldbuilding consultant</strong>.</p>
+          <div class="about-prose">
 
-            <!-- DRAFT (Claude wrote this, not John) - editorial credit. Rewrite in your own voice. -->
-            <p>Alongside my own writing I work as a <strong>developmental editor</strong>, most recently completing a full developmental edit of Richard Naughton's forthcoming interactive title <em>Those Folks at the Top</em>.</p>
+            <p>Graduated with <strong>first-class honours in English, Philosophy, and Creative Writing</strong>, mentored by internationally acclaimed voices including <strong>Mike McCormack, Alan McMonagle, and Nicole Flattery</strong>. Under their guidance I combined a love of magical realism with a clinical understanding of story structure and character. My written work is primarily in fiction and short fiction across the short story and games, often addressing <strong>memory, social cohesion and constructs, identity, and the liminal</strong>.</p>
 
-            <p>As the <strong>Founder of the Galway Writing Collective</strong>, and now <strong>co-founder of the Galway Writers' Community</strong>, I cultivate new literary voices and foster community among prose writers in the West of Ireland. We are a grassroots initiative supporting emerging writers through regular workshops and community events &mdash; reflecting an unwavering commitment to the importance of human connection, to play, and to narrative craft.</p>
+            <p>In 2020 my work <a href="https://www.globesoup.net/summer-2020-winner-1" target="_blank" rel="noopener"><em>The Circle, The Sickle, The Star</em></a> was <strong>shortlisted for the Globe Soup Prize</strong>. Since then I have applied my craft to games and cross-media IP: from developing worlds in <em>Soul Atlas</em>; to consultations and developmental edits for <em>Table Topple</em> across branching fiction and story-driven games, to serving as <strong>Managing Editor at <em>Inspire Me Korea</em></strong>, a cultural magazine bridging global audiences and Korean culture.</p>
 
-            <!-- DRAFT (Claude wrote this, not John) - Java / development. Rewrite in your own voice. -->
-            <p>I am currently <strong>studying and building in Java</strong>, working toward software development while keeping narrative craft at the centre of what I do.</p>
+            <div class="disclosure">
+              <button type="button" class="disclosure-btn" aria-expanded="false" aria-controls="more-soul-atlas">
+                <span>More on Soul Atlas</span>
+                <span class="chev" aria-hidden="true"></span>
+              </button>
+              <div class="disclosure-panel" id="more-soul-atlas" hidden>
+                <p>I served as <strong>worldbuilder, lore-keeper, writer, and editor</strong> on <em>Soul Atlas</em>, an ambitious cross-media fantasy project. In my time there, I combined <strong>geopolitics, culture, ideology, and philosophy</strong> with topography and real world history to co-create an original, cohesive universe with original characters. I have contributed as editor on promotional trailers and on their graphic novels. I continue to work with the team as an occasional editor, and as a <strong>narrative and worldbuilding consultant</strong>.</p>
+                <p class="disclosure-link"><a href="https://soul-atlas.com/grimhald/" target="_blank" rel="noopener">Read their graphic novel, Grimhald &#8599;</a></p>
+              </div>
+            </div>
 
-            <p><strong>I am now available</strong> for freelance, full-time, and consulting projects in <strong>narrative design, transmedia storytelling, editing, and worldbuilding</strong>. If you're seeking a partner in building new realms &mdash; or breathing new life into existing ones &mdash; I'd love to connect.</p>
+            <div class="disclosure">
+              <button type="button" class="disclosure-btn" aria-expanded="false" aria-controls="more-table-topple">
+                <span>More on Table Topple</span>
+                <span class="chev" aria-hidden="true"></span>
+              </button>
+              <div class="disclosure-panel" id="more-table-topple" hidden>
+                <p>I have worked on multiple occasions with <em>Table Topple</em> as a <strong>developmental editor and narrative consultant</strong>, most recently completing a full developmental edit of their forthcoming interactive choose your own adventure title, <em>Those Folks at the Top</em>. I have also worked as a consultant on their upcoming game, set in the same universe.</p>
+                <p class="disclosure-link"><a href="https://tabletopple.com/" target="_blank" rel="noopener">Visit Table Topple &#8599;</a></p>
+              </div>
+            </div>
 
-            <p class="about-cta"><a href="mailto:jmvodonnell@gmail.com?subject=Collaboration%20Inquiry" class="cta-btn">Get in touch</a></p>
+            <p>I am currently pursuing a career in <strong>Java Development</strong> while keeping narrative craft at the centre of the work. I am interested in the intersection where the two meet: systems that carry story, and stories shaped by the systems that hold them. Currently, I am working as a <strong>solo dev, writer, composer, and sound designer</strong> on an early prototype of an upcoming Ascii-art title set in a dark and absurd future. More details will follow!</p>
+
+            <p><strong>I am available</strong> for freelance, full-time, and consulting work in <strong>narrative design, editing, worldbuilding, Java development, and cross-media storytelling</strong>. If you're looking to build a new world, or breathe life into an existing one, I would like to hear about it.</p>
+
           </div>
+
+          <p class="about-cta"><a href="mailto:jmvodonnell@gmail.com?subject=Collaboration%20Inquiry" class="cta-btn">Get in touch</a></p>
+
+          <hr class="about-divider">
+
+          <p class="signature-credit">J.M O'Donnell</p>
+          <div class="signature-container">
+            <span class="signature" role="img" aria-label="John O'Donnell's signature"></span>
+          </div>
+
         </div>
       </div>
     </section>
@@ -138,6 +165,7 @@
           <button type="button" class="tab" role="tab" id="tab-narrative" aria-controls="narrative" aria-selected="false" data-target="narrative">YouTube</button>
           <button type="button" class="tab" role="tab" id="tab-editorial"  aria-controls="editorial"  aria-selected="false" data-target="editorial">Editorial</button>
           <button type="button" class="tab" role="tab" id="tab-games"      aria-controls="games"      aria-selected="false" data-target="games">Itch Projects</button>
+          <button type="button" class="tab" role="tab" id="tab-collective" aria-controls="collective" aria-selected="false" data-target="collective">Collective</button>
           <button type="button" class="tab" role="tab" id="tab-music"      aria-controls="music"      aria-selected="false" data-target="music">Music</button>
         </div>
 
@@ -320,40 +348,33 @@
           </div>
         </div>
 
-        </div><!-- /.tab-panels -->
+        <!-- Galway Writing Collective -->
+        <div id="collective" class="tab-panel" role="tabpanel" aria-labelledby="tab-collective" tabindex="0">
+          <div class="carousel-container">
+            <div class="collective-card">
+              <img src="Images/GWCBanner.jpg" alt="Galway Writing Collective" class="collective-image" loading="lazy" width="1840" height="920">
 
-      </div>
-    </section>
+              <div class="collective-text">
+                <h3 class="collective-subheading">The Galway Writing Collective</h3>
+                <p class="collective-motto">Crafting Stories | Building Worlds | Elevating Voices.</p>
 
-    <!-- Galway Writing Collective -->
-    <section id="writing-collective" aria-labelledby="collective-heading">
-      <div class="container">
-        <h2 id="collective-heading">The Galway Writing Collective</h2>
-        <p class="collective-motto">Crafting Stories | Building Worlds | Elevating Voices.</p>
+                <p>When I arrived in Galway in 2019, a prose collective didn't exist, and I suffered under the common belief that writing is something that has to be done in isolation. However, I wanted to change this, and when I couldn't find a collective, I decided to form one.</p>
 
-        <div class="grid">
-          <div class="card collective-card">
-            <img src="Images/GWCBanner.jpg" alt="Galway Writing Collective" class="collective-image" loading="lazy" width="1840" height="920">
+                <p>Over five years I led a <strong>weekly prose workshop</strong>, facilitated <strong>four monthly events</strong>, and established <strong>Galway's only regular technical editing workshop</strong>. I built a brand that drew recognition from literary journals, publishers and authors, and a community that supported emerging writers across the West of Ireland.</p>
 
-            <div class="collective-text">
-              <h3 class="collective-subheading">Founding the Collective</h3>
+                <p>The Collective concluded in 2024, though I hope it has inspired others to continue the work of building a community and bringing writers together.</p>
 
-              <p>When I arrived in Galway in 2019, a prose collective didn't exist, and I suffered under the common belief that writing is something that has to be done in isolation. However, I wanted to change this, and when I couldn't find a collective, I decided to form one.</p>
-
-              <p>Over five years I led a <strong>weekly prose workshop</strong>, facilitated <strong>four monthly events</strong>, and established <strong>Galway's only regular technical editing workshop</strong>. I built a brand that drew recognition from literary journals, publishers and authors, and a community that supported emerging writers across the West of Ireland.</p>
-
-              <p>The Collective concluded in 2024, though I hope it has inspired others to continue the work of building a community and bringing writers together.</p>
-
-              <p class="signature-credit">J.M O&#39;Donnell, Founder of The Galway Writing Collective.</p>
-              <div class="signature-container">
-                <img src="Images/Sign1.png" alt="John O'Donnell's signature" class="signature" loading="lazy" width="400" height="167">
+                <p class="collective-founder">J.M O&#39;Donnell, Founder</p>
               </div>
             </div>
           </div>
         </div>
+
+
+        </div><!-- /.tab-panels -->
+
       </div>
     </section>
-
     <!-- Testimonials -->
     <section id="testimonials" aria-labelledby="testimonials-heading">
       <div class="testimonials-container">
@@ -640,12 +661,26 @@ document.addEventListener('DOMContentLoaded', function () {
   });
   if (tabs.length) selectTab(tabs[0]);
 
-  /* ---------- Highlight the section you're reading ---------- */
+  /* ---------- Highlight the section you're reading ----------
+     One indicator element slides between links rather than each link
+     owning its own underline, so the marker glides instead of popping. */
   const navFor = {};
   $$('nav a[href^="#"]').forEach(a => { navFor[a.getAttribute('href').slice(1)] = a; });
+  const indicator = $('.nav-indicator');
   const sections = $$('main section[id]').filter(s => navFor[s.id]);
+
+  function moveIndicator(link) {
+    if (!indicator || !link) return;
+    const parent = indicator.parentElement.getBoundingClientRect();
+    const r = link.getBoundingClientRect();
+    indicator.style.width = r.width + 'px';
+    indicator.style.transform = `translateX(${r.left - parent.left}px)`;
+    indicator.style.opacity = '1';
+  }
+
   if ('IntersectionObserver' in window && sections.length) {
     const marked = new Set();
+    let active = null;
     const paint = () => {
       // The section nearest the middle of the viewport wins.
       let best = null, bestDist = Infinity;
@@ -656,14 +691,40 @@ document.addEventListener('DOMContentLoaded', function () {
         if (d < bestDist) { bestDist = d; best = s; }
       });
       Object.values(navFor).forEach(a => { a.classList.remove('current'); a.removeAttribute('aria-current'); });
-      if (best) { navFor[best.id].classList.add('current'); navFor[best.id].setAttribute('aria-current', 'true'); }
+      if (best) {
+        const link = navFor[best.id];
+        link.classList.add('current');
+        link.setAttribute('aria-current', 'true');
+        if (link !== active) { active = link; moveIndicator(link); }
+      } else if (indicator) {
+        active = null;
+        indicator.style.opacity = '0';
+      }
     };
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => e.isIntersecting ? marked.add(e.target) : marked.delete(e.target));
       paint();
     }, { rootMargin: '-45% 0px -45% 0px' });
     sections.forEach(s => io.observe(s));
+
+    // Keep it aligned when the nav reflows.
+    let rid;
+    window.addEventListener('resize', () => {
+      clearTimeout(rid);
+      rid = setTimeout(() => { if (active) moveIndicator(active); }, 120);
+    });
   }
+
+  /* ---------- Disclosures (More on Soul Atlas / Table Topple) ---------- */
+  $$('.disclosure-btn').forEach(btn => {
+    const panel = document.getElementById(btn.getAttribute('aria-controls'));
+    if (!panel) return;
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      panel.hidden = open;
+    });
+  });
 
   /* ---------- Read more ---------- */
   $$('.read-more-btn').forEach(btn => {
