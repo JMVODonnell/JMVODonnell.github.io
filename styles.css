@@ -1506,3 +1506,56 @@ body { font-weight: 400; letter-spacing: 0.1px; }
   filter: drop-shadow(0 4px 14px rgba(0,0,0,0.65));
 }
 @media (max-width: 480px) { .header-logo img { width: 90vw; } }
+
+/* ---- Hero: the mark in place of the portrait ---------------------------
+   The circle now carries the brand mark rather than a photograph, so it is
+   padded and contained rather than cropped. The portrait still opens the
+   About card. */
+.header-mark {
+  width: 150px; height: 150px;
+  border-radius: 50%;
+  object-fit: contain;
+  padding: 18px;
+  margin-bottom: 22px;
+  border: 2px solid var(--gold-line-str);
+  background: rgba(var(--bg-rgb),0.55);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.6), 0 0 34px rgba(var(--gold-rgb),0.18);
+}
+
+.header-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 5.6vw, 2.9rem);
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text);
+  margin: 0 0 10px 0;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.85);
+}
+
+.header-motto {
+  font-family: var(--font-display);
+  font-size: clamp(0.72rem, 1.9vw, 0.86rem);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 18px 0;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.85);
+}
+
+@media (max-width: 480px) {
+  .header-mark { width: 118px; height: 118px; padding: 14px; }
+  .header-name { letter-spacing: 2px; }
+  .header-motto { letter-spacing: 2.5px; }
+}
+
+/* Composer makes the role line longer; ease the tracking so it holds one
+   row at common widths and breaks cleanly rather than mid-phrase below. */
+.header-roles {
+  letter-spacing: 1.4px;
+  font-size: clamp(0.78rem, 1.9vw, 0.95rem);
+  max-width: 34ch;
+  margin-left: auto;
+  margin-right: auto;
+  text-wrap: balance;
+}
