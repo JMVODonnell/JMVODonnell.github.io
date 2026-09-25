@@ -1509,16 +1509,7 @@ body { font-weight: 400; letter-spacing: 0.1px; }
    The circle now carries the brand mark rather than a photograph, so it is
    padded and contained rather than cropped. The portrait still opens the
    About card. */
-.header-mark {
-  width: 150px; height: 150px;
-  border-radius: 50%;
-  object-fit: contain;
-  padding: 18px;
-  margin-bottom: 22px;
-  border: 2px solid var(--gold-line-str);
-  background: rgba(var(--bg-rgb),0.55);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.6), 0 0 34px rgba(var(--gold-rgb),0.18);
-}
+
 
 .header-name {
   font-family: var(--font-display);
@@ -1542,7 +1533,8 @@ body { font-weight: 400; letter-spacing: 0.1px; }
 }
 
 @media (max-width: 480px) {
-  .header-mark { width: 118px; height: 118px; padding: 14px; }
+  .header-mark { width: 124px; height: 124px; }
+  .header-mark img { height: 78px; }
   .header-name { letter-spacing: 2px; }
   .header-motto { letter-spacing: 2.5px; }
 }
@@ -1563,13 +1555,26 @@ body { font-weight: 400; letter-spacing: 0.1px; }
    ========================================================================= */
 
 /* ---- The mark inside the circle ----
-   A square mark in a round frame clips at the corners: the widest square
-   that fits a circle of diameter D is only 0.707D, so the arch and its base
-   were being cut. Padding is set past that inscribed square, and the circle
-   grown so the mark is not left small. */
+   The circle lives on a wrapper, not on the img, so the artwork can never be
+   clipped by it. Putting border-radius on the image itself was cutting the
+   arch and its base line, and no amount of padding fixes that reliably
+   because the mark's viewBox is 132x146 (portrait), not square. */
 .header-mark {
-  width: 170px; height: 170px;
-  padding: 26px;
+  display: grid;
+  place-items: center;
+  width: 168px; height: 168px;
+  border-radius: 50%;
+  border: 2px solid var(--gold-line-str);
+  background: rgba(var(--bg-rgb),0.55);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.6), 0 0 34px rgba(var(--gold-rgb),0.18);
+  margin-bottom: 22px;
+}
+.header-mark img {
+  display: block;
+  width: auto;
+  /* Height only: the inscribed square of a 168px circle is ~119px, and the
+     mark is taller than wide, so height is what has to clear it. */
+  height: 104px;
 }
 
 /* ---- Hero: the tapestry comes forward on hover ----
@@ -1635,4 +1640,86 @@ header:focus-within::after { opacity: 0.55; }
 }
 @media (max-width: 768px) {
   .pub-preview-wide { flex: none; width: 100%; max-width: 280px; }
+}
+
+/* =========================================================================
+   SPECIALISM: BRANCHING NARRATIVE STRUCTURE
+   Placed between About and the work tabs on purpose. It is a capability John
+   wants to be hired for rather than a portfolio item, so it frames the work
+   that follows instead of sitting inside it. Prose-led rather than a
+   carousel, because it is an argument and not a gallery.
+   ========================================================================= */
+.specialism-card {
+  background: var(--dark-1);
+  border: 1px solid var(--gold-line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 44px 52px 40px;
+  text-align: center;
+  transition: border-color var(--speed) var(--ease),
+              box-shadow var(--speed) var(--ease),
+              transform var(--speed) var(--ease);
+}
+.specialism-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lift);
+  border-color: var(--gold-line-str);
+}
+
+.specialism-lead {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2.8vw, 1.5rem);
+  line-height: 1.5;
+  color: var(--gold);
+  max-width: 24ch;
+  margin: 0 auto 30px auto;
+}
+
+.specialism-prose { text-align: left; max-width: 68ch; margin: 0 auto; }
+.specialism-prose p { margin: 0 0 1.5rem 0; line-height: 1.85; }
+.specialism-prose strong { color: var(--gold); font-weight: 600; }
+
+/* A diamond between paragraphs, matching About. */
+.specialism-prose p + p::before {
+  content: "\25C6";
+  display: block;
+  text-align: center;
+  color: var(--gold-line-str);
+  font-size: 0.5em;
+  margin: 0 0 1.5rem 0;
+  letter-spacing: 0.4em;
+  text-indent: 0.4em;
+}
+
+/* Two pieces of evidence, stated plainly rather than dressed as cards. */
+.specialism-evidence {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+  max-width: 68ch;
+  margin: 34px auto 0 auto;
+  text-align: left;
+}
+.evidence-item {
+  border-left: 3px solid var(--gold-line-str);
+  padding: 4px 0 4px 18px;
+}
+.evidence-label {
+  margin: 0 0 4px 0;
+  font-size: 0.74em;
+  font-weight: 600;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.evidence-title { margin: 0 0 4px 0; font-family: var(--font-display); font-size: 1.1em; color: var(--text); }
+.evidence-note  { margin: 0; font-size: 0.9em; line-height: 1.5; color: var(--text-muted); }
+
+#branching .about-cta { margin-top: 34px !important; }
+
+@media (max-width: 768px) {
+  .specialism-card { padding: 30px 20px 28px; }
+  .specialism-prose { max-width: none; }
 }
