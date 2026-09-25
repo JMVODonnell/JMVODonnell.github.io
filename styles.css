@@ -4,22 +4,41 @@
    ============================================================ */
 
 :root {
+  /* ---- Brand palette, from 05_Brand-Sheet ----------------------------
+     Onyx #0F0F11 · Charcoal #1A1A1E · Portal Grey #57514A
+     Champagne Gold #C8A45D · Pale Gold #E6CF96
+     Midnight Ink #1E3050 · Ivory #F3EEE4
+     The -rgb triples exist so translucent rules, glows and borders follow
+     a palette change instead of being frozen as literals. */
+  --gold-rgb:      200, 164, 93;     /* Champagne Gold */
+  --bg-rgb:        26, 26, 30;       /* Charcoal */
+  --warm-rgb:      40, 32, 18;       /* warm veil over the hero photograph */
+
   /* Emphasis gold: links, key terms, headings. */
-  --gold:          #d4af37;
-  --gold-hover:    #ffd700;
-  --gold-muted:    #b99a2e;
+  --gold:          #C8A45D;
+  --gold-hover:    #E6CF96;
+  --gold-muted:    #A98A46;
   /* Structural gold: rules, borders, frames. Deliberately quieter so the
      emphasis gold still reads as emphasis. */
-  --gold-line:     rgba(212,175,55,0.38);
-  --gold-line-str: rgba(212,175,55,0.62);
+  --gold-line:     rgba(var(--gold-rgb),0.38);
+  --gold-line-str: rgba(var(--gold-rgb),0.62);
 
-  --bg:            #121212;
-  --dark-1:        #181818;
-  --dark-2:        #1e1e1e;
-  --card:          #212121;
-  --text:          #f1f1f1;
-  --text-dim:      #e5e5e5;
-  --text-muted:    #8d8d8d;
+  --onyx:          #0F0F11;
+  --bg:            #1A1A1E;
+  --dark-1:        #202027;
+  --dark-2:        #1E1E24;
+  --card:          #23232A;
+  --portal:        #57514A;
+  --ink:           #1E3050;
+  --text:          #F3EEE4;          /* Ivory */
+  --text-dim:      #DCD6CA;
+  --text-muted:    #8F8880;
+
+  /* ---- Type ----
+     Marcellus for the name, headings and spaced capitals.
+     Jost for titles and body copy. */
+  --font-display:  'Marcellus', Georgia, 'Times New Roman', serif;
+  --font-body:     'Jost', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
   /* One easing curve for everything. */
   --ease:          cubic-bezier(0.22, 1, 0.36, 1);
@@ -45,7 +64,7 @@
 
 body {
   margin: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: var(--font-body);
   background-color: var(--bg);
   color: var(--text);
   line-height: 1.6;
@@ -57,7 +76,7 @@ a:hover { text-decoration: underline; }
 
 img { max-width: 100%; }
 
-h1, h2, h3, h4 { line-height: 1.25; }
+h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.25; font-weight: 400; }
 
 [hidden] { display: none !important; }
 
@@ -116,7 +135,7 @@ header {
   position: relative;
   padding: 70px 20px;
   text-align: center;
-  color: #fff;
+  color: var(--text);
   overflow: hidden;
   background-color: var(--bg);
 }
@@ -134,10 +153,10 @@ header::after {
   content: '';
   position: absolute; inset: 0;
   background: linear-gradient(
-    rgba(18,18,18,0.82),
-    rgba(18,18,18,0.72) 40%,
-    rgba(30,24,10,0.78) 70%,
-    rgba(18,18,18,0.9)
+    rgba(var(--bg-rgb),0.90),
+    rgba(var(--bg-rgb),0.82) 40%,
+    rgba(var(--warm-rgb),0.86) 70%,
+    rgba(var(--bg-rgb),0.95)
   );
 }
 
@@ -158,7 +177,7 @@ header::after {
      the face small and lost inside a 150px circle. */
   margin-bottom: 20px;
   border: 4px solid var(--gold);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.6), 0 0 30px rgba(212,175,55,0.3);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.6), 0 0 30px rgba(var(--gold-rgb),0.3);
 }
 
 /* Wide enough to keep the role line on one row on desktop; the tagline
@@ -221,7 +240,7 @@ header h1 {
   border: 2px solid var(--gold);
   padding: 10px 28px;
 }
-.cta-secondary:hover { background: rgba(212,175,55,0.15); color: var(--gold-hover); }
+.cta-secondary:hover { background: rgba(var(--gold-rgb),0.15); color: var(--gold-hover); }
 
 /* ==================== NAV ==================== */
 nav {
@@ -234,7 +253,7 @@ nav {
   position: sticky;
   top: 0;
   z-index: 200;
-  border-bottom: 1px solid rgba(212,175,55,0.2);
+  border-bottom: 1px solid rgba(var(--gold-rgb),0.2);
 }
 
 nav a {
@@ -254,7 +273,7 @@ nav a.current::after {
   margin-top: 4px;
   border-radius: 2px;
   background: var(--gold-hover);
-  box-shadow: 0 0 8px rgba(212,175,55,0.6);
+  box-shadow: 0 0 8px rgba(var(--gold-rgb),0.6);
 }
 
 /* ==================== HEADINGS ==================== */
@@ -300,8 +319,8 @@ h2::before {
   object-fit: cover;
   object-position: center center;
   border-radius: 2px;
-  border: 1px solid rgba(212,175,55,0.7);
-  outline: 1px solid rgba(212,175,55,0.22);
+  border: 1px solid rgba(var(--gold-rgb),0.7);
+  outline: 1px solid rgba(var(--gold-rgb),0.22);
   outline-offset: 7px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.6);
 }
@@ -418,7 +437,7 @@ h2::before {
   cursor: pointer;
   transition: background-color var(--speed), color var(--speed), transform 0.2s;
 }
-.tab:hover { background-color: rgba(212,175,55,0.12); transform: translateY(-2px); }
+.tab:hover { background-color: rgba(var(--gold-rgb),0.12); transform: translateY(-2px); }
 .tab.active { background-color: var(--gold); color: var(--bg); font-weight: bold; }
 
 /* Reserve height so switching between a tall panel (Games) and a short one
@@ -447,13 +466,13 @@ h2::before {
   width: 12px; height: 12px;
   padding: 0;
   border-radius: 50%;
-  background: rgba(212,175,55,0.3);
+  background: rgba(var(--gold-rgb),0.3);
   border: 2px solid var(--gold);
   cursor: pointer;
   transition: background var(--speed), transform var(--speed);
 }
-.dot.active { background: var(--gold); transform: scale(1.3); box-shadow: 0 0 10px rgba(212,175,55,0.4); }
-.dot:hover  { background: rgba(212,175,55,0.6); }
+.dot.active { background: var(--gold); transform: scale(1.3); box-shadow: 0 0 10px rgba(var(--gold-rgb),0.4); }
+.dot:hover  { background: rgba(var(--gold-rgb),0.6); }
 
 .carousel-viewport {
   position: relative;
@@ -488,7 +507,7 @@ h2::before {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(212,175,55,0.9);
+  background: rgba(var(--gold-rgb),0.9);
   color: var(--bg);
   border: none;
   width: 45px; height: 45px;
@@ -536,7 +555,7 @@ h2::before {
   aspect-ratio: 16 / 9;
   border-radius: 10px;
   overflow: hidden;
-  border: 2px solid rgba(212,175,55,0.2);
+  border: 2px solid rgba(var(--gold-rgb),0.2);
   background: #000;
 }
 .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
@@ -577,7 +596,7 @@ h2::before {
   height: 260px;
   border-radius: 10px;
   overflow: hidden;
-  border: 2px solid rgba(212,175,55,0.2);
+  border: 2px solid rgba(var(--gold-rgb),0.2);
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 .pub-cover-img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -599,7 +618,7 @@ h2::before {
   font-family: inherit;
   font-size: 1em;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(212,175,55,0.3);
+  box-shadow: 0 4px 15px rgba(var(--gold-rgb),0.3);
   transition: background var(--speed), transform var(--speed);
 }
 .view-pdf-btn:hover { background: linear-gradient(135deg, var(--gold-hover), var(--gold)); transform: scale(1.05); }
@@ -616,14 +635,14 @@ h2::before {
   max-width: 560px;
   border-radius: 14px;
   overflow: hidden;
-  border: 1px solid rgba(212,175,55,0.55);
+  border: 1px solid rgba(var(--gold-rgb),0.55);
   box-shadow: 0 6px 26px rgba(0,0,0,0.55);
 }
 .banner-frame::after {
   content: '';
   position: absolute; inset: 0;
   pointer-events: none;
-  background: radial-gradient(ellipse at center, rgba(18,18,18,0) 40%, rgba(18,18,18,0.5) 100%);
+  background: radial-gradient(ellipse at center, rgba(var(--bg-rgb),0) 40%, rgba(var(--bg-rgb),0.5) 100%);
 }
 
 .itch-banner-full { display: block; width: 100%; height: auto; }
@@ -671,7 +690,7 @@ h2::before {
   object-fit: contain;
   background: var(--bg);
   border-radius: 10px;
-  border: 2px solid rgba(212,175,55,0.2);
+  border: 2px solid rgba(var(--gold-rgb),0.2);
   margin-bottom: 20px;
 }
 
@@ -684,7 +703,7 @@ h2::before {
   padding: 13px 36px;
   border-radius: 25px;
   font-weight: bold;
-  box-shadow: 0 4px 15px rgba(212,175,55,0.3);
+  box-shadow: 0 4px 15px rgba(var(--gold-rgb),0.3);
   transition: background var(--speed), transform var(--speed);
 }
 .game-play-btn:hover {
@@ -705,7 +724,7 @@ h2::before {
   color: var(--bg);
   border-radius: 25px;
   font-weight: bold;
-  box-shadow: 0 4px 15px rgba(212,175,55,0.3);
+  box-shadow: 0 4px 15px rgba(var(--gold-rgb),0.3);
   transition: transform var(--speed);
 }
 .bandcamp-link:hover { transform: translateY(-3px); text-decoration: none; }
@@ -732,7 +751,7 @@ h2::before {
   animation-play-state: paused;
 }
 .album-art.playing { animation-play-state: running; }
-.album-art::after { content: '\266A'; font-size: 50px; color: rgba(18,18,18,0.35); }
+.album-art::after { content: '\266A'; font-size: 50px; color: rgba(var(--bg-rgb),0.35); }
 @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
 .track-details { flex: 1; min-width: 0; }
@@ -741,7 +760,7 @@ h2::before {
 .track-genre {
   display: inline-block;
   padding: 4px 12px;
-  background: rgba(212,175,55,0.1);
+  background: rgba(var(--gold-rgb),0.1);
   border: 1px solid var(--gold);
   border-radius: 15px;
   font-size: 0.85em;
@@ -768,7 +787,7 @@ h2::before {
 .controls { display: flex; justify-content: center; align-items: center; gap: 24px; }
 
 .control-btn {
-  background: rgba(212,175,55,0.1);
+  background: rgba(var(--gold-rgb),0.1);
   border: 2px solid var(--gold);
   border-radius: 50%;
   width: 50px; height: 50px;
@@ -783,9 +802,9 @@ h2::before {
   font-size: 22px;
   background: linear-gradient(135deg, var(--gold), var(--gold-muted));
   color: var(--bg);
-  box-shadow: 0 5px 20px rgba(212,175,55,0.4);
+  box-shadow: 0 5px 20px rgba(var(--gold-rgb),0.4);
 }
-.control-btn:hover { transform: scale(1.1); box-shadow: 0 0 20px rgba(212,175,55,0.6); }
+.control-btn:hover { transform: scale(1.1); box-shadow: 0 0 20px rgba(var(--gold-rgb),0.6); }
 .control-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
 
 .volume-control { display: flex; align-items: center; gap: 10px; }
@@ -805,7 +824,7 @@ h2::before {
 }
 .playlist {
   margin-top: 30px;
-  border-top: 1px solid rgba(212,175,55,0.3);
+  border-top: 1px solid rgba(var(--gold-rgb),0.3);
   padding-top: 20px;
 }
 
@@ -834,11 +853,11 @@ h2::before {
   transition: background var(--speed), border-color var(--speed), transform var(--speed);
 }
 .playlist-item:hover {
-  background: rgba(212,175,55,0.1);
+  background: rgba(var(--gold-rgb),0.1);
   border-color: var(--gold);
   transform: translateX(5px);
 }
-.playlist-item.active { background: rgba(212,175,55,0.2); border-color: var(--gold); }
+.playlist-item.active { background: rgba(var(--gold-rgb),0.2); border-color: var(--gold); }
 
 .playlist-number { color: var(--text-muted); font-size: 0.9em; }
 .playlist-track-title { flex: 1; font-weight: 500; }
@@ -945,7 +964,7 @@ h2::before {
 
 .testimonial-name { font-size: 1.35em; color: var(--gold); margin: 0 0 5px 0; }
 .testimonial-company {
-  color: #b8a980;
+  color: var(--gold-hover);
   margin: 0 0 20px 0;
   font-size: 0.85em;
   letter-spacing: 0.8px;
@@ -982,12 +1001,12 @@ h2::before {
   cursor: pointer;
   transition: background var(--speed), color var(--speed);
 }
-.read-more-btn:hover { background: rgba(212,175,55,0.14); color: var(--gold-hover); }
+.read-more-btn:hover { background: rgba(var(--gold-rgb),0.14); color: var(--gold-hover); }
 
 /* ==================== FOOTER ==================== */
 footer {
   background: var(--bg);
-  border-top: 1px solid rgba(212,175,55,0.2);
+  border-top: 1px solid rgba(var(--gold-rgb),0.2);
   padding: 40px 20px;
   text-align: center;
 }
@@ -1018,7 +1037,7 @@ footer {
 .pdf-modal-header {
   display: flex; justify-content: space-between; align-items: center;
   padding: 18px 26px;
-  border-bottom: 2px solid rgba(212,175,55,0.2);
+  border-bottom: 2px solid rgba(var(--gold-rgb),0.2);
   gap: 16px;
 }
 .pdf-modal-header h3 { color: var(--gold); font-size: 1.2em; margin: 0; }
@@ -1035,12 +1054,12 @@ footer {
   border-radius: 50%;
   transition: background var(--speed), transform var(--speed);
 }
-.close-modal:hover { background: rgba(212,175,55,0.12); transform: rotate(90deg); }
+.close-modal:hover { background: rgba(var(--gold-rgb),0.12); transform: rotate(90deg); }
 
 .pdf-viewer-container { flex: 1; padding: 18px; overflow: hidden; }
-.pdf-viewer-container iframe { width: 100%; height: 100%; border-radius: 8px; border: 1px solid rgba(212,175,55,0.2); background: #fff; }
+.pdf-viewer-container iframe { width: 100%; height: 100%; border-radius: 8px; border: 1px solid rgba(var(--gold-rgb),0.2); background: #fff; }
 
-.pdf-modal-footer { padding: 14px 26px; border-top: 2px solid rgba(212,175,55,0.2); text-align: center; }
+.pdf-modal-footer { padding: 14px 26px; border-top: 2px solid rgba(var(--gold-rgb),0.2); text-align: center; }
 
 .external-link-btn {
   display: inline-block;
@@ -1051,7 +1070,7 @@ footer {
   font-size: 0.93em;
   transition: background var(--speed);
 }
-.external-link-btn:hover { background: rgba(212,175,55,0.12); text-decoration: none; }
+.external-link-btn:hover { background: rgba(var(--gold-rgb),0.12); text-decoration: none; }
 
 /* ==================== RESPONSIVE ==================== */
 @media (max-width: 900px) {
@@ -1278,9 +1297,10 @@ nav a.current::after { content: none; }
    bearing at this size; the font metrics report 0.71875em and no bearing,
    which is what kept the cap misplaced.
 
-   CAVEAT: the -3px horizontal nudge is measured for "G". Side bearings
-   differ per glyph, so changing this paragraph's first letter means
-   re-measuring it.
+   CAVEAT: the size and nudge are measured for Marcellus "G" against Jost
+   body text. Changing either face, the body size or the line-height means
+   re-measuring. Side bearings also differ per glyph, so changing this
+   paragraph's first letter means re-measuring too.
    --------------------------------------------------------------------- */
 #about-me .about-prose > p.has-dropcap {
   position: relative;
@@ -1298,8 +1318,8 @@ nav a.current::after { content: none; }
   position: absolute;
   top: 0;
   left: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 97.53px;   /* ink = 71.2px = line 1 cap top to line 3 baseline */
+  font-family: var(--font-display);
+  font-size: 96.22px;   /* ink = 71.2px = line 1 cap top to line 3 baseline, Marcellus */
   line-height: 1;
   color: var(--gold);
   /* Set from measurement: cancels the glyph's bearings so the INK, not the
@@ -1456,3 +1476,33 @@ nav a.current::after { content: none; }
   .nav-inner { gap: 8px 18px; padding: 14px 16px; }
   .nav-indicator { bottom: 9px; }
 }
+
+
+/* ---- Brand type mapping -------------------------------------------------
+   Marcellus carries the name, headings and anything set in spaced capitals;
+   Jost carries titles and body copy. Applied last so it wins over the
+   component rules above without editing each of them. */
+.profile-name, .game-title, .testimonial-name, .pub-title,
+.collective-subheading, .editorial-header h3, .music-header h3,
+.media-card h3, .about-intro, .collective-motto {
+  font-family: var(--font-display);
+  font-weight: 400;
+}
+
+/* Jost runs a little small at the same pixel size, and its light weights are
+   thin on a dark ground, so body copy sits slightly heavier. */
+body { font-weight: 400; letter-spacing: 0.1px; }
+.header-roles, .about-tagline, .credit-role, .pub-magazine,
+.testimonial-company, .profile-title { font-family: var(--font-body); }
+
+/* ---- Header lockup ----
+   The h1 is the brand lockup; its alt text is the accessible heading. */
+.header-logo { margin: 0 0 18px 0; line-height: 0; }
+.header-logo img {
+  display: block;
+  width: min(430px, 84vw);
+  height: auto;
+  margin: 0 auto;
+  filter: drop-shadow(0 4px 14px rgba(0,0,0,0.65));
+}
+@media (max-width: 480px) { .header-logo img { width: 90vw; } }
