@@ -1723,3 +1723,44 @@ header:focus-within::after { opacity: 0.55; }
   .specialism-card { padding: 30px 20px 28px; }
   .specialism-prose { max-width: none; }
 }
+
+/* ---- Branching section: mark, and indented prose blocks ----
+   The mark sits as a bare icon above the lead, no frame, so it reads as
+   branding rather than a second avatar.
+   Paragraphs inside a block run on with indented first lines, book-style,
+   so the three beats read as one passage rather than three separate notes. */
+.specialism-mark {
+  display: block;
+  width: auto;
+  height: 68px;
+  margin: 0 auto 24px auto;
+  opacity: 0.95;
+}
+
+.specialism-block p {
+  margin: 0;
+  text-indent: 2.2em;
+  line-height: 1.85;
+}
+
+/* One diamond between the two passages, not between every paragraph. */
+.specialism-block + .specialism-block { margin-top: 1.6rem; }
+.specialism-block + .specialism-block::before {
+  content: "\25C6";
+  display: block;
+  text-align: center;
+  color: var(--gold-line-str);
+  font-size: 0.5em;
+  margin: 0 0 1.6rem 0;
+  letter-spacing: 0.4em;
+  text-indent: 0.4em;
+}
+
+/* The generic prose rule would otherwise add a diamond between every
+   paragraph, which is not wanted inside a running passage. */
+.specialism-prose p + p::before { content: none; }
+
+@media (max-width: 480px) {
+  .specialism-mark { height: 56px; }
+  .specialism-block p { text-indent: 1.6em; }
+}
