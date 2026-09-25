@@ -1417,16 +1417,14 @@ nav a.current::after { content: none; }
    Sign1.png is padded so the ink's centre of gravity is the image centre,
    so "center" here centres the signature on its weight rather than on a
    box that included the long thin O'Donnell tail. Box matches 860/287. */
+/* The brand signature is already ivory with clean alpha, so it needs no
+   mask or filter. The old scanned one did. */
 .signature-container .signature {
   display: block;
-  width: 230px;
-  height: 77px;
+  width: 250px;
+  height: auto;
   margin: 0 auto;
-  background-color: #ffffff;
-  -webkit-mask: url("Images/Sign1.png") no-repeat center / contain;
-  mask: url("Images/Sign1.png") no-repeat center / contain;
-  filter: none;
-  opacity: 1;
+  opacity: 0.95;
 }
 
 /* ---- Testimonials: equal heights, button on a shared line ---- */
@@ -1558,4 +1556,83 @@ body { font-weight: 400; letter-spacing: 0.1px; }
   margin-left: auto;
   margin-right: auto;
   text-wrap: balance;
+}
+
+/* =========================================================================
+   BRAND HERO + ABOUT REFINEMENTS
+   ========================================================================= */
+
+/* ---- The mark inside the circle ----
+   A square mark in a round frame clips at the corners: the widest square
+   that fits a circle of diameter D is only 0.707D, so the arch and its base
+   were being cut. Padding is set past that inscribed square, and the circle
+   grown so the mark is not left small. */
+.header-mark {
+  width: 170px; height: 170px;
+  padding: 26px;
+}
+
+/* ---- Hero: the tapestry comes forward on hover ----
+   The veil keeps the type legible at rest and lifts to reveal the marble
+   underneath. focus-within covers keyboard users. */
+header::after { transition: opacity var(--glide) var(--ease); }
+header:hover::after,
+header:focus-within::after { opacity: 0.55; }
+
+@media (prefers-reduced-motion: reduce) {
+  header::after { transition: none; }
+}
+
+/* ---- Role line ----
+   Each role is a nowrap span with the separator generated between them, so a
+   wrap can only happen between roles and never strands a middot at the start
+   of a line, which is how it was breaking once Composer was added. */
+.header-roles {
+  max-width: none;
+  letter-spacing: 1.4px;
+}
+.header-roles span { white-space: nowrap; }
+.header-roles span + span::before {
+  content: '·';
+  margin: 0 0.55em;
+  color: var(--gold-line-str);
+}
+
+/* ---- About portrait: same lift the cards have ---- */
+#about-me .about-photo { margin: 0 0 34px 0; }
+#about-me .about-photo img {
+  transition: transform var(--speed) var(--ease),
+              box-shadow var(--speed) var(--ease),
+              border-color var(--speed) var(--ease),
+              outline-color var(--speed) var(--ease);
+}
+#about-me .about-photo img:hover {
+  transform: translateY(-4px);
+  border-color: var(--gold);
+  outline-color: var(--gold-line-str);
+  box-shadow: 0 18px 44px rgba(0,0,0,0.7), 0 0 34px rgba(var(--gold-rgb),0.28);
+}
+
+/* Air between the portrait, the heading and the capability list. */
+#about-me h2 { margin-bottom: 26px; }
+.about-intro { margin: 0 auto 28px auto; }
+.about-list { margin-bottom: 4px; }
+
+/* ---- Editorial: link styled as the article button ---- */
+.view-site-btn {
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+}
+.view-site-btn:hover { text-decoration: none; }
+
+/* A landscape cover needs a landscape frame; the portrait box cropped the
+   product shot down to a sliver. */
+.pub-preview-wide {
+  flex: 0 0 260px;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+@media (max-width: 768px) {
+  .pub-preview-wide { flex: none; width: 100%; max-width: 280px; }
 }
