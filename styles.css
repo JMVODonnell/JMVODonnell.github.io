@@ -1769,3 +1769,48 @@ header:focus-within::after { opacity: 0.55; }
    indented first line, so the passage reads as continuous, but no longer
    as a single wall of text. */
 .specialism-block p + p { margin-top: 1.05rem; }
+
+/* =========================================================================
+   MOBILE CORRECTIONS
+   ========================================================================= */
+
+/* The hero text column was capped at 64ch, which resolves to ~473px in Jost.
+   On a 375px phone that overflowed the viewport and, because the header
+   clips rather than scrolls, the name, role line and buttons were being cut
+   off at both edges without any horizontal scrollbar to reveal it. */
+.text-container { max-width: min(64ch, 100%); }
+.header-tagline { max-width: min(46ch, 100%); }
+.about-intro    { max-width: min(46ch, 100%); }
+.specialism-lead { max-width: min(24ch, 100%); }
+.section-intro  { max-width: min(60ch, 100%); }
+
+/* Touch targets. Links in the nav and footer were 22-24px tall, well under
+   the 44px guideline. The padding enlarges the tappable area without
+   changing how anything looks. */
+@media (max-width: 768px) {
+  nav a { padding: 10px 2px; }
+  .footer-links a { display: inline-block; padding: 8px 2px; }
+
+  /* Dots keep their 12px appearance; the pseudo-element carries the touch
+     area. Spacing is widened so neighbouring targets do not overlap. */
+  .carousel-dots { gap: 20px; }
+  .dot { position: relative; }
+  .dot::after { content: ''; position: absolute; inset: -9px; }
+
+  /* Thin controls get a taller grab area, again without changing the look. */
+  .progress-bar { position: relative; }
+  .progress-bar::after { content: ''; position: absolute; inset: -16px 0; }
+}
+
+/* The role line could not wrap at all: making each role a nowrap span had
+   also removed the whitespace between them, leaving no break opportunity,
+   so "Java Developer" ran off a 360px screen. Whitespace is back in the
+   markup, and the separator now trails its own role rather than leading the
+   next one, so a wrap leaves "... Editor ·" at the end of a line instead of
+   stranding a middot at the start of the next. */
+.header-roles span + span::before { content: none; }
+.header-roles span:not(:last-child)::after {
+  content: '·';
+  margin-left: 0.55em;
+  color: var(--gold-line-str);
+}
