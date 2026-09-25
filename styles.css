@@ -1764,3 +1764,8 @@ header:focus-within::after { opacity: 0.55; }
   .specialism-mark { height: 56px; }
   .specialism-block p { text-indent: 1.6em; }
 }
+
+/* Air between the paragraphs inside each passage. They still carry an
+   indented first line, so the passage reads as continuous, but no longer
+   as a single wall of text. */
+.specialism-block p + p { margin-top: 1.05rem; }
